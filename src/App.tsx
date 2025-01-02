@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import erumaLogo from './assets/eruma_logo.png'
+//import { useState } from 'react'
+//import erumaLogo from './assets/eruma_logo.png'
 import portrait from './assets/portrait.jpg'
 import './App.css'
 
