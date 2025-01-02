@@ -1,33 +1,41 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import erumaLogo from './assets/eruma_logo.png'
+import portrait from './assets/portrait.jpg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className='card'>
+        <div className='left'>
+          <img src={portrait} className='portrait' alt='Tobias' />
+          <ul>
+            <li className='name'>Tobias Årud</li>
+            <li className='title'>Frontend och Wordpressutvecklare</li>
+            <li className='current-employer'><a href="https://addcode.se">@Addcode AB</a> <span>sedan 2022</span></li>
+          </ul>
+        </div>
+        <div className='right'>
+            <p className='description'>
+            På en spännande resa för en mer tillgänglig webb: WordPress trollkarl, lojal som en hob och med en Jedis känsla för detaljer. Problemlösning är mitt andra språk!
+            </p>
+            <div className='skillset row'>
+              <div className='column'>
+                <h2>Riddare</h2>
+                <p>Värnar om tillgänglighet, användbarhet och är mån om kundernas behov och säkerhet.</p>
+              </div>
+              <div className='column'>
+                <h2>Trollkarl</h2>
+                <p>Samlar på kodsnuttar och erfarenheter som jag sedan kan dra ur min magiska bok för att snabba på framtida projekt och hjälpa mina kollegor.</p>
+              </div>
+              <div className='column'>
+                <h2>Ninja</h2>
+                <p>Som modern utvecklare anpassar jag mig efter kunders och arbetsgivares behov. Jag hanterar förutom php, Wordpress diverse tekniker från duktiga JavaScript ninjor.</p>
+              </div>
+            </div>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
