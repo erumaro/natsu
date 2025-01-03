@@ -7,6 +7,7 @@ function App() {
 
   return (
     <>
+      <h1 className='screen-reader-text'>Eruma - Tobias Årud</h1>
       <div className='card'>
         <div className='left'>
           <img src={portrait} className='portrait' alt='Tobias' />
@@ -17,9 +18,9 @@ function App() {
           </ul>
         </div>
         <div className='right'>
-            <p className='description'>
+            <q className='description'>
             På en spännande resa för en mer tillgänglig webb: WordPress trollkarl, lojal som en hob och med en Jedis känsla för detaljer. Problemlösning är mitt andra språk!
-            </p>
+            </q>
             <div className='skillset row'>
               <div className='column'>
                 <h2>Riddare</h2>

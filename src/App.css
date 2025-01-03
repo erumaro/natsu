@@ -5,6 +5,39 @@
   text-align: center;
 }
 
+.screen-reader-text {
+	border: 0;
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute !important;
+	width: 1px;
+	word-wrap: normal !important;
+}
+
+.screen-reader-text:focus {
+	background-color: #e9ecef;
+	border-radius: 3px;
+	box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+	clip: auto !important;
+	clip-path: none;
+	color: #212529;
+	display: block;
+	font-size: 0.875rem;
+	font-weight: 700;
+	height: auto;
+	left: 5px;
+	line-height: normal;
+	padding: 15px 23px 14px;
+	text-decoration: none;
+	top: 5px;
+	width: auto;
+	z-index: 100000;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -51,7 +84,7 @@
 .card > .left > img.portrait {
   width: 100%;
   height: auto;
-  border-radius: 20em;
+  border-radius: 40em;
 }
 
 .card > .left > ul > li.name {
@@ -76,4 +109,38 @@
 
 .card > .right > .row .column {
   width: 33.33%;
+}
+
+@media only screen and (max-width: 990px) {
+  .card > .left {
+    width: 40%;
+  }
+
+  .card > .right {
+    width: 60%;
+  }
+
+  .row {
+    flex-direction: column;
+  }
+
+  .card > .right > .row .column {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .card {
+    flex-direction: column;
+    font-size: 1.2em;
+    border-top-width: 2em;
+  }
+
+  .card > .left {
+    width: auto;
+  }
+
+  .card > .right {
+    width: 100%;
+  }
 }
