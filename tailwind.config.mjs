@@ -51,9 +51,9 @@ const config = {
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
       borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
+        md: '0.5rem',
+        lg: '0.75rem',
+        xl: '1rem',
       },
       colors: {
         accent: {
@@ -70,11 +70,25 @@ const config = {
           DEFAULT: 'hsl(var(--destructive))',
           foreground: 'hsl(var(--destructive-foreground))',
         },
+        falun: {
+          100: '#F6E9E7',
+          200: '#E8C9C4',
+          600: '#8F1D14',
+          700: '#74160F',
+        },
         foreground: 'hsl(var(--foreground))',
         input: 'hsl(var(--input))',
         muted: {
           DEFAULT: 'hsl(var(--muted))',
           foreground: 'hsl(var(--muted-foreground))',
+        },
+        neutral: {
+          0: '#FFFFFF',
+          50: '#FAFAFA',
+          200: '#E5E5E5',
+          500: '#6B6B6B',
+          700: '#3F3F3F',
+          900: '#111111',
         },
         popover: {
           DEFAULT: 'hsl(var(--popover))',
@@ -96,6 +110,17 @@ const config = {
       fontFamily: {
         mono: ['var(--font-geist-mono)'],
         sans: ['var(--font-geist-sans)'],
+      },
+      fontSize: {
+        xs: ['0.75rem', { lineHeight: '1.1rem' }],
+        sm: ['0.875rem', { lineHeight: '1.4rem' }],
+        base: ['1rem', { lineHeight: '1.7rem' }],
+        lg: ['1.125rem', { lineHeight: '1.9rem' }],
+        xl: ['1.25rem', { lineHeight: '2.1rem' }],
+        '2xl': ['1.5rem', { lineHeight: '2.3rem' }],
+        '3xl': ['2rem', { lineHeight: '2.6rem' }],
+        '4xl': ['2.75rem', { lineHeight: '3.2rem' }],
+        '5xl': ['3.5rem', { lineHeight: '1.1' }],
       },
       keyframes: {
         'accordion-down': {
