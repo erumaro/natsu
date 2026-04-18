@@ -32,6 +32,7 @@ node_modules
 .env.production
 .next
 .vercel
+next-env.d.ts
 
 # Payload default media upload directory
 public/media/
