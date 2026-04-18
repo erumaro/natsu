@@ -54,7 +54,7 @@ export default function StickyNav() {
           {sections.map(({ id, label }) => (
             <li key={id}>
               <a
-                ref={(el) => (refs.current[id] = el)}
+                ref={(el) => {refs.current[id] = el}}
                 href={`#${id}`}
                 className={`
                   relative inline-block py-2
