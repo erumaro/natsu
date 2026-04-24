@@ -13,7 +13,7 @@
     "skipLibCheck": true,
     "noEmit": true,
     "incremental": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
@@ -26,14 +26,14 @@
     ],
     "paths": {
       "@payload-config": [
-        ".src/payload.config.ts"
+        "./src/payload.config.ts"
       ],
       "react": [
         "./node_modules/@types/react"
       ],
       "@/*": [
         "./src/*"
-      ]
+      ],
     }
   },
   "include": [
@@ -42,12 +42,10 @@
     ".next/types/**/*.ts",
     "redirects.js",
     "next-env.d.ts",
-    "next.config.mjs",
-    "next-sitemap.config.cjs",
-    "dist/types/**/*.ts",
-    "dist/dev/types/**/*.ts"
+    "next.config.js",
+    "next-sitemap.config.cjs"
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
 }
