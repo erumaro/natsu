@@ -1,15 +1,10 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "next.config.js",
-      "use": "@vercel/next"
-    }
-  ],
+  "framework": "nextjs",
   "env": {
     "MONGODB_URI": "@mongodb_uri",
+    "DATABASE_URI": "@mongodb_uri",
     "PAYLOAD_SECRET": "@payload_secret",
-    "NEXT_PUBLIC_SITE_URL": "@next_public_site_url"
-  },
-  "routes": []
+    "NEXT_PUBLIC_SITE_URL": "@next_public_site_url",
+    "NEXT_PUBLIC_SERVER_URL": "@next_public_site_url"
+  }
 }
