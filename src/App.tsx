@@ -1,22 +1,28 @@
-//import { useState } from 'react'
-//import erumaLogo from './assets/eruma_logo.png'
-//import portrait from './assets/portrait.jpg'
-import { Hero } from "./components/sections/Hero"
-import StickyNav from "./components/StickyNav"
-import { Process } from "./components/sections/Process"
-import { Competence } from "./components/sections/Competence"
-import { Examples } from "./components/sections/Examples"
-import { Footer } from "./components/sections/Footer"
+'use client'
 
-export default function App() {
+import { Hero } from './components/sections/Hero'
+import StickyNav from './components/StickyNav'
+import { Process } from './components/sections/Process'
+import { Competence } from './components/sections/Competence'
+import { Examples } from './components/sections/Examples'
+import { Footer } from './components/sections/Footer'
+import type { Competence as CompetenceDoc, Example, Hero as HeroDoc, Process as ProcessDoc } from './payload-types'
 
+interface AppProps {
+  heroData?: HeroDoc | null
+  competenceData?: CompetenceDoc[]
+  examplesData?: Example[]
+  processData?: ProcessDoc[]
+}
+
+export default function App({ heroData, competenceData, examplesData, processData }: AppProps) {
   return (
     <main>
-      <Hero />
+      <Hero data={heroData ?? undefined} />
       <StickyNav />
-      <Process />
-      <Competence />
-      <Examples />
+      <Process data={processData} />
+      <Competence data={competenceData} />
+      <Examples data={examplesData} />
       <Footer />
     </main>
   )

@@ -1,11 +1,25 @@
-import { Section } from "../layout/Section";
-import { Heading } from "../layout/Heading";
-import { useTheme } from "../../hooks/useTheme";
-import { focusHashTarget } from "../../utils/anchorFocus";
-import { site } from '../../content/site';
+'use client'
+
+import { Section } from '../layout/Section'
+import { Heading } from '../layout/Heading'
+import { useTheme } from '../../hooks/useTheme'
+import { focusHashTarget } from '../../utils/anchorFocus'
+import { site } from '../../content/site'
+
+interface HeroData {
+  title: string
+  intro: string
+  stack?: Array<{ skill: string } | string> | null
+  ctaPrimary: string
+  ctaSecondary: string
+}
+
+interface HeroProps {
+  data?: HeroData
+}
 
 export function ThemeToggle() {
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme } = useTheme()
 
   return (
     <button
@@ -25,10 +39,16 @@ export function ThemeToggle() {
     >
       {theme === 'dark' ? 'Ljust läge' : 'Mörkt läge'}
     </button>
-  );
+  )
 }
 
-export function Hero() {
+export function Hero({ data }: HeroProps) {
+  const heroData = data || site.hero
+
+  // Handle stack items - could be string or object with 'skill' property
+  const stackItems = Array.isArray(heroData.stack)
+    ? heroData.stack.map((item) => (typeof item === 'string' ? item : item.skill))
+    : []
 
   return (
     <Section as="header">
@@ -38,18 +58,16 @@ export function Hero() {
       </div>
 
       {/* Heading */}
-      <Heading level={1}>
-        {site.hero.title}
-      </Heading>
+      <Heading level={1}>{heroData.title}</Heading>
 
       {/* Intro */}
       <p className="mt-5 max-w-prose text-lg text-neutral-700 dark:text-neutral-300">
-        {site.hero.intro}
+        {heroData.intro}
       </p>
 
       {/* Stack */}
       <p className="mt-5 text-sm text-neutral-500 dark:text-neutral-400">
-        {site.hero.stack.join(' · ')}
+        {stackItems.join(' · ')}
       </p>
 
       {/* CTA */}
@@ -68,11 +86,11 @@ export function Hero() {
             focus-visible:ring-offset-2
           `}
           onClick={(e) => {
-            e.preventDefault();
-            focusHashTarget('#process');
+            e.preventDefault()
+            focusHashTarget('#process')
           }}
         >
-          {site.hero.ctaPrimary}
+          {heroData.ctaPrimary}
         </a>
 
         <a
@@ -90,13 +108,13 @@ export function Hero() {
             focus-visible:ring-offset-2
           `}
           onClick={(e) => {
-            e.preventDefault();
-            focusHashTarget('#competence');
+            e.preventDefault()
+            focusHashTarget('#competence')
           }}
         >
-          {site.hero.ctaSecondary}
+          {heroData.ctaSecondary}
         </a>
       </div>
     </Section>
-  );
+  )
 }

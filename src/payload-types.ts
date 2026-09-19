@@ -72,6 +72,10 @@ export interface Config {
     media: Media;
     categories: Category;
     users: User;
+    hero: Hero;
+    competences: Competence;
+    examples: Example;
+    process: Process;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -88,6 +92,10 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    hero: HeroSelect<false> | HeroSelect<true>;
+    competences: CompetencesSelect<false> | CompetencesSelect<true>;
+    examples: ExamplesSelect<false> | ExamplesSelect<true>;
+    process: ProcessSelect<false> | ProcessSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -736,6 +744,67 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hero".
+ */
+export interface Hero {
+  id: string;
+  title: string;
+  intro: string;
+  stack?:
+    | {
+        skill: string;
+        id?: string | null;
+      }[]
+    | null;
+  ctaPrimary: string;
+  ctaSecondary: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "competences".
+ */
+export interface Competence {
+  id: string;
+  title: string;
+  intro: string;
+  items?:
+    | {
+        item: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "examples".
+ */
+export interface Example {
+  id: string;
+  title: string;
+  problem: string;
+  solution: string;
+  result: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "process".
+ */
+export interface Process {
+  id: string;
+  step: string;
+  title: string;
+  description: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -926,6 +995,22 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'users';
         value: string | User;
+      } | null)
+    | ({
+        relationTo: 'hero';
+        value: string | Hero;
+      } | null)
+    | ({
+        relationTo: 'competences';
+        value: string | Competence;
+      } | null)
+    | ({
+        relationTo: 'examples';
+        value: string | Example;
+      } | null)
+    | ({
+        relationTo: 'process';
+        value: string | Process;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1290,6 +1375,63 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "hero_select".
+ */
+export interface HeroSelect<T extends boolean = true> {
+  title?: T;
+  intro?: T;
+  stack?:
+    | T
+    | {
+        skill?: T;
+        id?: T;
+      };
+  ctaPrimary?: T;
+  ctaSecondary?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "competences_select".
+ */
+export interface CompetencesSelect<T extends boolean = true> {
+  title?: T;
+  intro?: T;
+  items?:
+    | T
+    | {
+        item?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "examples_select".
+ */
+export interface ExamplesSelect<T extends boolean = true> {
+  title?: T;
+  problem?: T;
+  solution?: T;
+  result?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "process_select".
+ */
+export interface ProcessSelect<T extends boolean = true> {
+  step?: T;
+  title?: T;
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

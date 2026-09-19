@@ -47,6 +47,22 @@
     --success: 196 52% 74%;
     --warning: 34 89% 85%;
     --error: 10 100% 86%;
+
+    /* Vite / brand tokens */
+    --color-falun-100: #f6e9e7;
+    --color-falun-200: #e8c9c4;
+    --color-falun-600: #8f1d14;
+    --color-falun-700: #74160f;
+
+    --color-neutral-0: #ffffff;
+    --color-neutral-50: #fafafa;
+    --color-neutral-200: #e5e5e5;
+    --color-neutral-300: #d4d4d4;
+    --color-neutral-400: #a3a3a3;
+    --color-neutral-500: #6b6b6b;
+    --color-neutral-700: #3f3f3f;
+    --color-neutral-800: #262626;
+    --color-neutral-900: #111111;
   }
 
   [data-theme='dark'] {
@@ -81,6 +97,19 @@
     --success: 196 100% 14%;
     --warning: 34 51% 25%;
     --error: 10 39% 43%;
+
+    --color-neutral-0: #0f0f0f;
+    --color-neutral-50: #161616;
+    --color-neutral-200: #2a2a2a;
+    --color-neutral-300: #3f3f3f;
+    --color-neutral-400: #737373;
+    --color-neutral-500: #9a9a9a;
+    --color-neutral-700: #d1d1d1;
+    --color-neutral-800: #e5e5e5;
+    --color-neutral-900: #f5f5f5;
+
+    --color-falun-600: #b83227;
+    --color-falun-700: #d6453a;
   }
 }
 
@@ -90,14 +119,64 @@
   }
   body {
     @apply bg-background text-foreground min-h-[100vh] flex flex-col;
+    font-size: 1rem;
+    line-height: 1.7rem;
   }
 }
 
 html {
   opacity: 0;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 html[data-theme='dark'],
 html[data-theme='light'] {
   opacity: initial;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .motion-fade {
+    animation: fade-in 0.4s ease-out both;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .interactive-lift {
+    transition:
+      transform 160ms ease,
+      box-shadow 160ms ease,
+      background-color 160ms ease,
+      color 160ms ease;
+  }
+
+  .interactive-lift:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  .interactive-lift:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  }
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-falun-600);
+  outline-offset: 3px;
+  transition: outline-offset 0.15s ease;
 }
