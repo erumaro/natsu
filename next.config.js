@@ -31,6 +31,10 @@ const nextConfig = {
   },
   reactStrictMode: true,
   redirects,
+  // eslint-plugin-react-hooks@4 crashes on ESLint 9 (`getSource is not a function`)
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 }
 
 export default withPayload(nextConfig, { devBundleServerPackages: false })
