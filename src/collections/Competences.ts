@@ -2,6 +2,8 @@ import type { CollectionConfig } from 'payload'
 
 export const Competences: CollectionConfig = {
   slug: 'competences',
+  orderable: true,
+  defaultSort: '_order',
   access: {
     read: () => true,
   },

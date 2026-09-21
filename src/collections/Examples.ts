@@ -2,6 +2,8 @@ import type { CollectionConfig } from 'payload'
 
 export const Examples: CollectionConfig = {
   slug: 'examples',
+  orderable: true,
+  defaultSort: '_order',
   access: {
     read: () => true,
   },

@@ -2,6 +2,8 @@ import type { CollectionConfig } from 'payload'
 
 export const Process: CollectionConfig = {
   slug: 'process',
+  orderable: true,
+  defaultSort: '_order',
   access: {
     read: () => true,
   },

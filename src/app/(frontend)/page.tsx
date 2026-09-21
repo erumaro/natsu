@@ -19,16 +19,19 @@ async function getHomeContent() {
       }),
       payload.find({
         collection: 'process',
+        sort: ['_order', 'createdAt'],
         limit: 100,
         pagination: false,
       }),
       payload.find({
         collection: 'competences',
+        sort: ['_order', 'createdAt'],
         limit: 100,
         pagination: false,
       }),
       payload.find({
         collection: 'examples',
+        sort: ['_order', 'createdAt'],
         limit: 100,
         pagination: false,
       }),

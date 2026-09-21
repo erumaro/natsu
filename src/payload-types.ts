@@ -767,6 +767,7 @@ export interface Hero {
  */
 export interface Competence {
   id: string;
+  _order?: string | null;
   title: string;
   intro: string;
   items?:
@@ -784,6 +785,7 @@ export interface Competence {
  */
 export interface Example {
   id: string;
+  _order?: string | null;
   title: string;
   problem: string;
   solution: string;
@@ -797,6 +799,7 @@ export interface Example {
  */
 export interface Process {
   id: string;
+  _order?: string | null;
   step: string;
   title: string;
   description: string;
@@ -1399,6 +1402,7 @@ export interface HeroSelect<T extends boolean = true> {
  * via the `definition` "competences_select".
  */
 export interface CompetencesSelect<T extends boolean = true> {
+  _order?: T;
   title?: T;
   intro?: T;
   items?:
@@ -1415,6 +1419,7 @@ export interface CompetencesSelect<T extends boolean = true> {
  * via the `definition` "examples_select".
  */
 export interface ExamplesSelect<T extends boolean = true> {
+  _order?: T;
   title?: T;
   problem?: T;
   solution?: T;
@@ -1427,6 +1432,7 @@ export interface ExamplesSelect<T extends boolean = true> {
  * via the `definition` "process_select".
  */
 export interface ProcessSelect<T extends boolean = true> {
+  _order?: T;
   step?: T;
   title?: T;
   description?: T;
