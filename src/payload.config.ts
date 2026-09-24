@@ -15,6 +15,8 @@ import { Hero } from './collections/Hero'
 import { Competences } from './collections/Competences'
 import { Examples } from './collections/Examples'
 import { Process } from './collections/Process'
+import { Contact } from './Contact/config'
+import { ensureSiteContent } from './endpoints/seed/ensureSiteContent'
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
 import { plugins } from './plugins'
@@ -68,7 +70,10 @@ export default buildConfig({
   }),
   collections: [Pages, Posts, Media, Categories, Users, Hero, Competences, Examples, Process],
   cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer],
+  globals: [Header, Footer, Contact],
+  onInit: async (payload) => {
+    await ensureSiteContent(payload)
+  },
   plugins: [
     ...plugins,
     // storage-adapter-placeholder

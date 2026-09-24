@@ -111,10 +111,12 @@ export interface Config {
   globals: {
     header: Header;
     footer: Footer;
+    contact: Contact;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    contact: ContactSelect<false> | ContactSelect<true>;
   };
   locale: null;
   user: User & {
@@ -569,6 +571,8 @@ export interface FormBlock {
   blockType: 'formBlock';
 }
 /**
+ * E-postadresser för utskick syns bara för inloggade användare. Utskicken skickas när en e-postadapter är konfigurerad. Meddelanden sparas alltid under Meddelanden.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "forms".
  */
@@ -1729,26 +1733,45 @@ export interface Header {
  */
 export interface Footer {
   id: string;
-  navItems?:
+  contactHeading: string;
+  email: string;
+  links?:
     | {
-        link: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?:
-            | ({
-                relationTo: 'pages';
-                value: string | Page;
-              } | null)
-            | ({
-                relationTo: 'posts';
-                value: string | Post;
-              } | null);
-          url?: string | null;
-          label: string;
-        };
+        label: string;
+        /**
+         * https://…, mailto:…, tel:… eller en intern sökväg som börjar med /.
+         */
+        url: string;
+        newTab?: boolean | null;
         id?: string | null;
       }[]
     | null;
+  accessibilityHeading: string;
+  accessibilityText: string;
+  accessibilityNote?: string | null;
+  /**
+   * Visas efter året, till exempel “© 2026 Tobias Årud”.
+   */
+  copyrightName: string;
+  tagline?: string | null;
+  builtWith?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Rubrik och ingress visas ovanför formuläret. Själva fälten, knapptexten, bekräftelsen och eventuella e-postutskick redigeras under Formulär. Inskickade meddelanden sparas under Meddelanden.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact".
+ */
+export interface Contact {
+  id: string;
+  heading: string;
+  intro?: string | null;
+  /**
+   * Välj vilket formulär som visas i kontaktsektionen.
+   */
+  form?: (string | null) | Form;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1780,20 +1803,34 @@ export interface HeaderSelect<T extends boolean = true> {
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
-  navItems?:
+  contactHeading?: T;
+  email?: T;
+  links?:
     | T
     | {
-        link?:
-          | T
-          | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-              label?: T;
-            };
+        label?: T;
+        url?: T;
+        newTab?: T;
         id?: T;
       };
+  accessibilityHeading?: T;
+  accessibilityText?: T;
+  accessibilityNote?: T;
+  copyrightName?: T;
+  tagline?: T;
+  builtWith?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact_select".
+ */
+export interface ContactSelect<T extends boolean = true> {
+  heading?: T;
+  intro?: T;
+  form?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

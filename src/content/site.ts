@@ -47,6 +47,33 @@ export const site = {
     },
   ],
 
+  contact: {
+    heading: 'Kontakta mig',
+    intro:
+      'Har du ett uppdrag, en fråga eller vill du bolla ett problem? Skicka ett meddelande så återkommer jag.',
+    confirmation: 'Tack. Jag har tagit emot ditt meddelande och återkommer så snart jag kan.',
+    submitLabel: 'Skicka meddelande',
+    unavailable:
+      'Formuläret är inte tillgängligt just nu. Mejla mig så återkommer jag.',
+  },
+
+  footer: {
+    contactHeading: 'Kontakt',
+    email: 'hej@example.se',
+    links: [
+      { label: 'LinkedIn', url: 'https://www.linkedin.com/', newTab: true },
+      { label: 'GitHub', url: 'https://github.com/', newTab: true },
+    ],
+    accessibilityHeading: 'Tillgänglighet',
+    accessibilityText:
+      'Den här webbplatsen är byggd med tillgänglighet som grundprincip. Fokus ligger på semantisk HTML, tangentbordsnavigering, tydliga kontraster och kompatibilitet med skärmläsare.',
+    accessibilityNote:
+      'Upplever du problem eller har förbättringsförslag är du välkommen att höra av dig.',
+    copyrightName: 'Tobias Årud',
+    tagline: 'Webbutveckling med fokus på tillgänglighet och långsiktig kvalitet.',
+    builtWith: 'Byggd med React och Tailwind CSS',
+  },
+
   process: [
     {
       step: '01',

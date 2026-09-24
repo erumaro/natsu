@@ -6,6 +6,7 @@ const sections = [
   { id: 'process', label: 'Så jobbar jag' },
   { id: 'competence', label: 'Teknik & kompetens' },
   { id: 'examples', label: 'Exempel & resonemang' },
+  { id: 'contact', label: 'Kontakt' },
 ];
 
 export default function StickyNav() {
@@ -50,18 +51,18 @@ export default function StickyNav() {
     });
   }, [active]);
   return (
-    <nav className="sticky top-0 z-40 border-b border-neutral-200 backdrop-blur">
-      <div className="relative mx-auto max-w-5xl px-6">
-        <ul className="relative flex h-14 items-center gap-8 text-sm font-medium">
+    <nav className="sticky top-0 z-40 border-b border-neutral-200 backdrop-blur" aria-label="Sidinnehåll">
+      <div className="relative mx-auto max-w-5xl overflow-x-auto px-6">
+        <ul className="relative flex h-14 w-max min-w-full items-center gap-6 text-sm font-medium md:gap-8">
           {sections.map(({ id, label }) => (
-            <li key={id}>
+            <li key={id} className="shrink-0">
               <a
                 ref={(el) => {
                   refs.current[id] = el
                 }}
                 href={`#${id}`}
                 className={`
-                  relative inline-block py-2
+                  relative inline-block whitespace-nowrap py-2
                   transition-colors
                   ${
                     active === id
@@ -75,16 +76,15 @@ export default function StickyNav() {
               </a>
             </li>
           ))}
-        </ul>
 
-        {/* 🔥 Sliding underline */}
-        <span
-          className="absolute bottom-0 h-[2px] bg-falun-600 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
-          style={{
-            width: style.width,
-            transform: `translateX(${style.left}px)`,
-          }}
-        />
+          <span
+            className="absolute bottom-0 h-[2px] bg-falun-600 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
+            style={{
+              width: style.width,
+              transform: `translateX(${style.left}px)`,
+            }}
+          />
+        </ul>
       </div>
     </nav>
   );

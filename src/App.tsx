@@ -5,7 +5,8 @@ import StickyNav from './components/StickyNav'
 import { Process } from './components/sections/Process'
 import { Competence } from './components/sections/Competence'
 import { Examples } from './components/sections/Examples'
-import { Footer } from './components/sections/Footer'
+import { Contact, type ContactSectionData } from './components/sections/Contact'
+import { Footer, type FooterContent } from './components/sections/Footer'
 import type { Competence as CompetenceDoc, Example, Hero as HeroDoc, Process as ProcessDoc } from './payload-types'
 
 interface AppProps {
@@ -13,9 +14,18 @@ interface AppProps {
   competenceData?: CompetenceDoc[]
   examplesData?: Example[]
   processData?: ProcessDoc[]
+  contactData?: ContactSectionData | null
+  footerData?: FooterContent | null
 }
 
-export default function App({ heroData, competenceData, examplesData, processData }: AppProps) {
+export default function App({
+  heroData,
+  competenceData,
+  examplesData,
+  processData,
+  contactData,
+  footerData,
+}: AppProps) {
   return (
     <main>
       <Hero data={heroData ?? undefined} />
@@ -23,7 +33,8 @@ export default function App({ heroData, competenceData, examplesData, processDat
       <Process data={processData} />
       <Competence data={competenceData} />
       <Examples data={examplesData} />
-      <Footer />
+      <Contact data={contactData} fallbackEmail={footerData?.email} />
+      <Footer data={footerData} />
     </main>
   )
 }

@@ -1,7 +1,10 @@
-import type { CollectionSlug, GlobalSlug, Payload, PayloadRequest, File } from 'payload'
+import type { CollectionSlug, Payload, PayloadRequest, File } from 'payload'
+
+import { site } from '@/content/site'
 
 import { contactForm as contactFormData } from './contact-form'
 import { contact as contactPageData } from './contact-page'
+import { homeContactForm } from './home-contact-form'
 import { home } from './home'
 import { image1 } from './image-1'
 import { image2 } from './image-2'
@@ -19,7 +22,6 @@ const collections: CollectionSlug[] = [
   'form-submissions',
   'search',
 ]
-const globals: GlobalSlug[] = ['header', 'footer']
 
 // Next.js revalidation errors are normal when seeding the database without a server running
 // i.e. running `yarn seed` locally instead of using the admin UI within an active app
@@ -41,20 +43,37 @@ export const seed = async ({
   payload.logger.info(`— Clearing collections and globals...`)
 
   // clear the database
-  await Promise.all(
-    globals.map((global) =>
-      payload.updateGlobal({
-        slug: global,
-        data: {
-          navItems: [],
-        },
-        depth: 0,
-        context: {
-          disableRevalidate: true,
-        },
-      }),
-    ),
-  )
+  await Promise.all([
+    payload.updateGlobal({
+      slug: 'header',
+      data: {
+        navItems: [],
+      },
+      depth: 0,
+      context: {
+        disableRevalidate: true,
+      },
+    }),
+    payload.updateGlobal({
+      slug: 'footer',
+      data: site.footer,
+      depth: 0,
+      context: {
+        disableRevalidate: true,
+      },
+    }),
+    payload.updateGlobal({
+      slug: 'contact',
+      data: {
+        heading: site.contact.heading,
+        intro: site.contact.intro,
+      },
+      depth: 0,
+      context: {
+        disableRevalidate: true,
+      },
+    }),
+  ])
 
   await Promise.all(
     collections.map((collection) => payload.db.deleteMany({ collection, req, where: {} })),
@@ -259,11 +278,18 @@ export const seed = async ({
 
   payload.logger.info(`— Seeding contact form...`)
 
-  const contactForm = await payload.create({
-    collection: 'forms',
-    depth: 0,
-    data: contactFormData,
-  })
+  const [contactForm, homepageForm] = await Promise.all([
+    payload.create({
+      collection: 'forms',
+      depth: 0,
+      data: contactFormData,
+    }),
+    payload.create({
+      collection: 'forms',
+      depth: 0,
+      data: homeContactForm,
+    }),
+  ])
 
   payload.logger.info(`— Seeding pages...`)
 
@@ -309,32 +335,17 @@ export const seed = async ({
     }),
     payload.updateGlobal({
       slug: 'footer',
+      data: site.footer,
+    }),
+    payload.updateGlobal({
+      slug: 'contact',
       data: {
-        navItems: [
-          {
-            link: {
-              type: 'custom',
-              label: 'Admin',
-              url: '/admin',
-            },
-          },
-          {
-            link: {
-              type: 'custom',
-              label: 'Source Code',
-              newTab: true,
-              url: 'https://github.com/payloadcms/payload/tree/main/templates/website',
-            },
-          },
-          {
-            link: {
-              type: 'custom',
-              label: 'Payload',
-              newTab: true,
-              url: 'https://payloadcms.com/',
-            },
-          },
-        ],
+        heading: site.contact.heading,
+        intro: site.contact.intro,
+        form: homepageForm.id,
+      },
+      context: {
+        disableRevalidate: true,
       },
     }),
   ])

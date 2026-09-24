@@ -7,7 +7,7 @@ type Props = {
     children: ReactNode
 } & HTMLAttributes<HTMLElement>
 
-export function Heading({ level, children }: Props) {
+export function Heading({ level, children, className, ...props }: Props) {
     const Tag = `h${level}` as const
 
     const styles = {
@@ -16,5 +16,9 @@ export function Heading({ level, children }: Props) {
         3: 'text-xl font-medium',
     }
 
-    return <Tag className={styles[level]}>{children}</Tag>
+    return (
+        <Tag className={[styles[level], className].filter(Boolean).join(' ')} {...props}>
+            {children}
+        </Tag>
+    )
 }

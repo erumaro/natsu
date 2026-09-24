@@ -5,6 +5,7 @@ import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { searchPlugin } from '@payloadcms/plugin-search'
 import { Plugin } from 'payload'
+import { revalidateContactForm } from '@/hooks/revalidateContactForm'
 import { revalidateRedirects } from '@/hooks/revalidateRedirects'
 import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
 import { FixedToolbarFeature, HeadingFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
@@ -59,9 +60,35 @@ export const plugins: Plugin[] = [
     fields: {
       payment: false,
     },
+    formSubmissionOverrides: {
+      labels: {
+        plural: 'Meddelanden',
+        singular: 'Meddelande',
+      },
+    },
     formOverrides: {
+      labels: {
+        plural: 'Formulär',
+        singular: 'Formulär',
+      },
+      admin: {
+        description:
+          'E-postadresser för utskick syns bara för inloggade användare. Utskicken skickas när en e-postadapter är konfigurerad. Meddelanden sparas alltid under Meddelanden.',
+      },
+      hooks: {
+        afterChange: [revalidateContactForm],
+      },
       fields: ({ defaultFields }) => {
         return defaultFields.map((field) => {
+          if ('name' in field && field.name === 'emails') {
+            return {
+              ...field,
+              access: {
+                read: ({ req: { user } }) => Boolean(user),
+              },
+            }
+          }
+
           if ('name' in field && field.name === 'confirmationMessage') {
             return {
               ...field,
