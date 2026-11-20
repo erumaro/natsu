@@ -31,6 +31,11 @@ const nextConfig = {
   },
   reactStrictMode: true,
   redirects,
+  // pdfkit reads its own data files from disk at runtime, so it must not be bundled.
+  serverExternalPackages: ['pdfkit'],
+  outputFileTracingIncludes: {
+    '/cv/**': ['./node_modules/geist/dist/fonts/geist-sans/*.woff2'],
+  },
   // eslint-plugin-react-hooks@4 crashes on ESLint 9 (`getSource is not a function`)
   eslint: {
     ignoreDuringBuilds: true,

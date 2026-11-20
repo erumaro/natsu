@@ -112,11 +112,13 @@ export interface Config {
     header: Header;
     footer: Footer;
     contact: Contact;
+    cv: Cv;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
     contact: ContactSelect<false> | ContactSelect<true>;
+    cv: CvSelect<false> | CvSelect<true>;
   };
   locale: null;
   user: User & {
@@ -1776,6 +1778,153 @@ export interface Contact {
   createdAt?: string | null;
 }
 /**
+ * CV på svenska och engelska. Engelska fält som lämnas tomma visar den svenska texten. Spara innan du laddar ner PDF:en.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cv".
+ */
+export interface Cv {
+  id: string;
+  fullName: string;
+  /**
+   * T.ex. "Frontendutvecklare" / "Frontend Developer".
+   */
+  headline?: {
+    sv?: string | null;
+    en?: string | null;
+  };
+  email?: string | null;
+  phone?: string | null;
+  /**
+   * T.ex. "Stockholm".
+   */
+  location?: {
+    sv?: string | null;
+    en?: string | null;
+  };
+  /**
+   * Skrivs ut som text (t.ex. linkedin.com/in/namn) så att både ATS-system och människor kan läsa dem.
+   */
+  links?:
+    | {
+        label: string;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Några meningar om vem du är och vad du söker. Använd gärna nyckelord från annonserna du söker.
+   */
+  summary?: {
+    sv?: string | null;
+    en?: string | null;
+  };
+  /**
+   * Lägg den senaste först.
+   */
+  experience?:
+    | {
+        role: {
+          sv: string;
+          en?: string | null;
+        };
+        organization: string;
+        location?: string | null;
+        startDate: string;
+        endDate?: string | null;
+        current?: boolean | null;
+        description?: {
+          sv?: string | null;
+          en?: string | null;
+        };
+        /**
+         * En punkt per rad. Börja gärna med ett verb och ett mätbart resultat.
+         */
+        highlights?: {
+          sv?: string | null;
+          en?: string | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Lägg den senaste först.
+   */
+  education?:
+    | {
+        degree: {
+          sv: string;
+          en?: string | null;
+        };
+        school: string;
+        location?: string | null;
+        startDate?: string | null;
+        endDate?: string | null;
+        description?: {
+          sv?: string | null;
+          en?: string | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  skills?:
+    | {
+        /**
+         * T.ex. "Frontend" eller "Tillgänglighet" / "Accessibility".
+         */
+        category: {
+          sv: string;
+          en?: string | null;
+        };
+        /**
+         * Kommaseparerade. Skriv ut både förkortning och fullt namn när det är vanligt i annonser, t.ex. "WCAG 2.2".
+         */
+        items: {
+          sv: string;
+          en?: string | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  languages?:
+    | {
+        language: {
+          sv: string;
+          en?: string | null;
+        };
+        /**
+         * T.ex. "Modersmål" / "Native".
+         */
+        level?: {
+          sv?: string | null;
+          en?: string | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  certifications?:
+    | {
+        name: {
+          sv: string;
+          en?: string | null;
+        };
+        issuer?: string | null;
+        date?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * När rutan är urkryssad kan bara inloggade användare se webbsidan och ladda ner PDF:en.
+   */
+  published?: boolean | null;
+  /**
+   * Telefonnumret finns alltid med i PDF:en.
+   */
+  hidePhoneOnWeb?: boolean | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
@@ -1831,6 +1980,141 @@ export interface ContactSelect<T extends boolean = true> {
   heading?: T;
   intro?: T;
   form?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cv_select".
+ */
+export interface CvSelect<T extends boolean = true> {
+  fullName?: T;
+  headline?:
+    | T
+    | {
+        sv?: T;
+        en?: T;
+      };
+  email?: T;
+  phone?: T;
+  location?:
+    | T
+    | {
+        sv?: T;
+        en?: T;
+      };
+  links?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        id?: T;
+      };
+  summary?:
+    | T
+    | {
+        sv?: T;
+        en?: T;
+      };
+  experience?:
+    | T
+    | {
+        role?:
+          | T
+          | {
+              sv?: T;
+              en?: T;
+            };
+        organization?: T;
+        location?: T;
+        startDate?: T;
+        endDate?: T;
+        current?: T;
+        description?:
+          | T
+          | {
+              sv?: T;
+              en?: T;
+            };
+        highlights?:
+          | T
+          | {
+              sv?: T;
+              en?: T;
+            };
+        id?: T;
+      };
+  education?:
+    | T
+    | {
+        degree?:
+          | T
+          | {
+              sv?: T;
+              en?: T;
+            };
+        school?: T;
+        location?: T;
+        startDate?: T;
+        endDate?: T;
+        description?:
+          | T
+          | {
+              sv?: T;
+              en?: T;
+            };
+        id?: T;
+      };
+  skills?:
+    | T
+    | {
+        category?:
+          | T
+          | {
+              sv?: T;
+              en?: T;
+            };
+        items?:
+          | T
+          | {
+              sv?: T;
+              en?: T;
+            };
+        id?: T;
+      };
+  languages?:
+    | T
+    | {
+        language?:
+          | T
+          | {
+              sv?: T;
+              en?: T;
+            };
+        level?:
+          | T
+          | {
+              sv?: T;
+              en?: T;
+            };
+        id?: T;
+      };
+  certifications?:
+    | T
+    | {
+        name?:
+          | T
+          | {
+              sv?: T;
+              en?: T;
+            };
+        issuer?: T;
+        date?: T;
+        id?: T;
+      };
+  published?: T;
+  hidePhoneOnWeb?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
