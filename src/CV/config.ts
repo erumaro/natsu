@@ -119,15 +119,10 @@ export const CV: GlobalConfig = {
                 {
                   type: 'row',
                   fields: [
-                    monthField('startDate', 'Start', true),
-                    {
-                      ...monthField('endDate', 'Slut'),
-                      admin: {
-                        width: '50%',
-                        date: { pickerAppearance: 'monthOnly', displayFormat: 'MMM yyyy' },
-                        condition: (_, siblingData) => !siblingData?.current,
-                      },
-                    },
+                    monthField('startDate', 'Start', { required: true }),
+                    monthField('endDate', 'Slut', {
+                      condition: (_, siblingData) => !siblingData?.current,
+                    }),
                   ],
                 },
                 { name: 'current', type: 'checkbox', label: 'Pågående' },

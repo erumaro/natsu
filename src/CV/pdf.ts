@@ -48,7 +48,8 @@ export function renderCVPdf(cv: ResolvedCV): Promise<Buffer> {
     size: 'A4',
     margin: 56,
     pdfVersion: '1.7',
-    subset: 'PDF/UA',
+    // Supported by pdfkit, but missing from @types/pdfkit's PDFSubsets union.
+    subset: 'PDF/UA' as PDFKit.Mixins.PDFSubsets,
     tagged: true,
     displayTitle: true,
     lang: labels.langTag,
@@ -89,7 +90,7 @@ export function renderCVPdf(cv: ResolvedCV): Promise<Buffer> {
   }
 
   const leaf = (parent: Struct, type: string, draw: () => void) => {
-    parent.add(doc.struct(type as never, draw))
+    parent.add(doc.struct(type, {}, draw))
   }
 
   const rule = () => {

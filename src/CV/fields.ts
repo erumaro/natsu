@@ -1,4 +1,4 @@
-import type { Field } from 'payload'
+import type { DateField, Field } from 'payload'
 
 type TranslatedOptions = {
   label: string
@@ -32,7 +32,13 @@ export function translated(
   } as Field
 }
 
-export const monthField = (name: string, label: string, required = false): Field => ({
+type Condition = NonNullable<NonNullable<DateField['admin']>['condition']>
+
+export const monthField = (
+  name: string,
+  label: string,
+  { required = false, condition }: { required?: boolean; condition?: Condition } = {},
+): DateField => ({
   name,
   type: 'date',
   label,
@@ -40,5 +46,6 @@ export const monthField = (name: string, label: string, required = false): Field
   admin: {
     width: '50%',
     date: { pickerAppearance: 'monthOnly', displayFormat: 'MMM yyyy' },
+    condition,
   },
 })
